@@ -1,3 +1,5 @@
+import React from 'react'
+
 import SummaryItem from './SummaryItem'
 import { Task } from '../../App'
 
