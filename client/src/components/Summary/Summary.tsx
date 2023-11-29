@@ -1,12 +1,12 @@
 import React from 'react'
 
 import SummaryItem from './SummaryItem'
-import { Task } from '../../App'
+import { ITodo } from '../../models/ITodo'
 
-const Summary = ({ tasks }: { tasks: Task[] }) => {
-	const total = tasks.length
-	const pending = tasks.filter((task) => task.done === false).length
-	const done = tasks.filter((task) => task.done === true).length
+const Summary = ({ todos }: { todos: ITodo[] }) => {
+	const total = todos.length
+	const pending = todos.filter((todo) => todo.done === false).length
+	const done = todos.filter((todo) => todo.done === true).length
 	return (
 		<>
 			<div className="flex justify-between">

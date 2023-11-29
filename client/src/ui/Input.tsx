@@ -1,24 +1,28 @@
-import React, { FormEvent, useState } from 'react'
+import React, { useState } from 'react'
+import { ITodo } from '../models/ITodo'
 
-const InputContainer = ({
-	handleSubmit,
-}: {
+type Props = {
 	handleSubmit: (
-		e: FormEvent<HTMLFormElement>,
-		value: string,
-		descr: string
+		e: React.FormEvent,
+		todoName: string,
+		todoDescription: string,
+		todo?: ITodo
 	) => void
-}) => {
-	const [newTaskName, setNewTaskName] = useState('')
-	const [taskDescription, setTaskDescription] = useState('')
+	btnText: string
+	todo?: ITodo
+}
+
+const InputContainer = ({ handleSubmit, btnText }: Props) => {
+	const [todoName, setTodoName] = useState('')
+	const [todoDescription, setTodoDescription] = useState('')
 
 	return (
 		<form
 			className="flex flex-col gap-4"
 			onSubmit={(e) => {
-				handleSubmit(e, newTaskName, taskDescription)
-				setNewTaskName('')
-				setTaskDescription('')
+				handleSubmit(e, todoName, todoDescription)
+				setTodoName('')
+				setTodoDescription('')
 			}}
 		>
 			<div className="flex flex-col">
@@ -27,24 +31,26 @@ const InputContainer = ({
 					type="text"
 					placeholder="Название задачи"
 					className="p-1 my-2 rounded-sm border-2 border-solid hover:border-slate-500"
-					value={newTaskName}
-					onChange={(e) => setNewTaskName(e.target.value)}
+					value={todoName}
+					onChange={(e) => setTodoName(e.target.value)}
+					name="title"
 				/>
 				<label className="text-white">Введите описание задачи</label>
 				<input
 					type="text"
 					placeholder="Описание задачи"
 					className="p-1 my-2 rounded-sm border-2 border-solid hover:border-slate-500"
-					value={taskDescription}
-					onChange={(e) => setTaskDescription(e.target.value)}
+					value={todoDescription}
+					onChange={(e) => setTodoDescription(e.target.value)}
+					name="description"
 				/>
 			</div>
 			<button
-				disabled={newTaskName ? false : true}
+				disabled={todoName ? false : true}
 				type="submit"
 				className="bg-blue-100 rounded-lg hover:bg-blue-200 p-1"
 			>
-				Добавить задачу
+				{btnText}
 			</button>
 		</form>
 	)
